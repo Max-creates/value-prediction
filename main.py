@@ -1,11 +1,11 @@
 from model import Prediction
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
+
 
 def make_prediction(inputs: list[float], outputs: list[float], input_value: float, plot: bool = False) -> Prediction:
     if len(inputs) != len(outputs):
@@ -34,7 +34,7 @@ def make_prediction(inputs: list[float], outputs: list[float], input_value: floa
 
     # Plot
     if plot:
-        raise NotImplemented('Plot function has not been created yet.')
+        display_plot(inputs=X, outputs=y, y_line=y_line)
 
     return Prediction(value=y_prediction[0][0],
                       r2_score=r2_score(test_y, y_test_prediction),
@@ -42,5 +42,12 @@ def make_prediction(inputs: list[float], outputs: list[float], input_value: floa
                       intercept=model.intercept_[0],
                       mean_absolute_error=mean_absolute_error(test_y, y_test_prediction))
 
+
+def display_plot(inputs: list[float], outputs: list[float], y_line):
+    plt.scatter(inputs, outputs, s=12)
+    plt.xlabel('Inputs')
+    plt.ylabel('Outputs')
+    plt.plot(inputs, y_line, color='r')
+    plt.show()
 
 
