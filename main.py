@@ -50,4 +50,16 @@ def display_plot(inputs: list[float], outputs: list[float], y_line):
     plt.plot(inputs, y_line, color='r')
     plt.show()
 
+if __name__ == '__main__':
+    years: list[int] = [1,2,3,4,5,6,7,8,9,10]
+    earnings: list[int] = [1000, 800, 2000, 1500, 3400, 3700, 4000, 3800, 5000, 4800]
+    my_input: int = 20
 
+    prediction: Prediction = make_prediction(inputs=years, outputs=earnings, input_value=my_input, plot=False) # plot=True to show plot
+    print('Input:', my_input)
+    print(prediction)
+
+    print(prediction.mean_absolute_error)
+    print('Year 30:', prediction.slope * 30)
+    print('Year 40:', prediction.slope * 40)
+    print('Year 50:', prediction.slope * 50)
